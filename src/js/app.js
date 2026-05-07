@@ -1,56 +1,21 @@
-// Config
-var CONFIG = {
-    storeName: 'frido-mothersday',
-    token: '5066c93ec2ad8e04e39e35e859728f33'
-};
-
+// Template and state
 var cardTemplate = '';
-var productVariants = {};  // { productId: [variants] }
+var productVariants = {};
+var currentCardId = null;
 
-async function loadTemplate() {
-    const response = await fetch('card.html');
-    const html = await response.text();
-    cardTemplate = html;
+// Load card template
+function loadTemplate() {
+    return fetch('src/components/card.html')
+        .then(function (res) {
+            if (!res.ok) {
+                throw new Error('Could not load card template: ' + res.status);
+            }
+            return res.text();
+        })
+        .then(function (html) { cardTemplate = html; });
 }
 
-async function fetchProducts() {
-    var url = 'https://' + CONFIG.storeName + '.myshopify.com/api/2024-01/graphql.json';
-
-    var query = '{ products(first: 6) { edges { node { id title description vendor priceRange { minVariantPrice { amount } } compareAtPriceRange { minVariantPrice { amount } } images(first: 1) { edges { node { url } } } variants(first: 10) { edges { node { id title availableForSale } } } } } } }';
-
-    try {
-        var response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Shopify-Storefront-Access-Token': CONFIG.token
-            },
-            body: JSON.stringify({ query: query })
-        });
-
-        var data = await response.json();
-
-        if (data.errors) {
-            document.getElementById('products-grid').innerHTML =
-                '<p style="color:red;">API Error. Check console.</p>';
-            console.error(data.errors);
-            return [];
-        }
-
-        var products = [];
-        for (var i = 0; i < data.data.products.edges.length; i++) {
-            products.push(data.data.products.edges[i].node);
-        }
-        return products;
-    } catch (err) {
-        document.getElementById('products-grid').innerHTML =
-            '<p style="color:red;">Network error. Check storeName and token.</p>';
-        console.error(err);
-        return [];
-    }
-}
-
-// build one card from the template
+// Build one card from template
 function buildCard(product) {
     var price = Math.round(parseFloat(product.priceRange.minVariantPrice.amount));
     var comparePrice = price;
@@ -68,17 +33,13 @@ function buildCard(product) {
         discount = Math.round(((comparePrice - price) / comparePrice) * 100);
     }
 
-    // short id for use in HTML ids
     var shortId = product.id.split('/').pop();
-
-    // save variants for later
     productVariants[shortId] = product.variants.edges;
 
-    // replace placeholders
     var html = cardTemplate;
     html = html.replace(/{{id}}/g, shortId);
     html = html.replace(/{{title}}/g, product.title);
-    html = html.replace(/{{description}}/g, product.description);
+    html = html.replace(/{{description}}/g, product.description || product.vendor);
     html = html.replace(/{{image}}/g, image);
     html = html.replace(/{{salePrice}}/g, price);
     html = html.replace(/{{comparePrice}}/g, comparePrice);
@@ -87,7 +48,7 @@ function buildCard(product) {
     return html;
 }
 
-// render products into grid
+// Render all products
 function renderProducts(products) {
     var grid = document.getElementById('products-grid');
     var allCards = '';
@@ -98,7 +59,7 @@ function renderProducts(products) {
 
     grid.innerHTML = allCards;
 
-    // After rendering, hide badges where discount is 0
+    // Hide 0% badges
     var badges = document.querySelectorAll('.discount-badge');
     for (var j = 0; j < badges.length; j++) {
         if (badges[j].textContent.indexOf('0%') === 0) {
@@ -107,10 +68,11 @@ function renderProducts(products) {
     }
 }
 
+function showError(message) {
+    document.getElementById('products-grid').innerHTML = '<p style="color:red; padding:20px;">' + message + '</p>';
+}
 
-// size modal
-var currentCardId = null;
-
+// ─── Size Modal ───
 function openSizeModal(cardId) {
     currentCardId = cardId;
     var variants = productVariants[cardId];
@@ -129,12 +91,10 @@ function openSizeModal(cardId) {
             btn.disabled = true;
         }
 
-        // highlight if size already selected
         if (currentSize === 'Size: ' + v.title) {
             btn.classList.add('selected');
         }
 
-        // use a closure so each button remembers its own size
         btn.onclick = (function (sizeName) {
             return function () {
                 document.getElementById('size-' + currentCardId).textContent = 'Size: ' + sizeName;
@@ -154,24 +114,31 @@ function closeModal() {
     currentCardId = null;
 }
 
-// close modal when clicking outside
 document.getElementById('modal').onclick = function (e) {
     if (e.target === document.getElementById('modal')) {
         closeModal();
     }
 };
 
+function closeErrorPopup() {
+    document.getElementById('error-popup').style.display = 'none';
+}
+
+// ─── Add to Cart ───
 function addToCart(cardId, price) {
     var sizeText = document.getElementById('size-' + cardId).textContent;
 
     if (sizeText === 'Size: -') {
-        alert('Please select a size first!');
+        document.getElementById('error-popup').style.display = 'flex';
         return;
     }
 
     var size = sizeText.replace('Size: ', '');
 
-    console.log('Added to Cart, ' + ' Size: ' + size + ' Price: ' + price);
+    console.log('--- Added to Cart ---');
+    console.log('Size:', size);
+    console.log('Price: ₹' + price);
+    console.log('---------------------');
 
     var btn = document.getElementById('cartbtn-' + cardId);
     btn.textContent = 'Added ✓';
@@ -185,8 +152,19 @@ function addToCart(cardId, price) {
     }, 2000);
 }
 
-(async function init() {
-    await loadTemplate();
-    var products = await fetchProducts();
-    if (products.length > 0) renderProducts(products);
-})();
+// ─── Start ───
+loadTemplate()
+    .then(function () {
+        return fetchProducts();  // fetchProducts comes from api.js
+    })
+    .then(function (products) {
+        if (products.length > 0) {
+            renderProducts(products);
+        } else {
+            showError('No products found. Check API config in api.js');
+        }
+    })
+    .catch(function (err) {
+        console.error(err);
+        showError('Unable to load products. Check console for details.');
+    });

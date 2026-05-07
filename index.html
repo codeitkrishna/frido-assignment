@@ -7,8 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="modal.css">
+    <!-- CSS - updated paths -->
+    <link rel="stylesheet" href="src/css/style.css">
+    <link rel="stylesheet" href="src/css/modal.css">
 </head>
 <body>
 
@@ -29,11 +30,20 @@
     <div id="modal" class="modal">
         <div class="modal-box">
             <span class="modal-close" onclick="closeModal()">&times;</span>
-            <h3>Choose a Size</h3>
+            <h3>Select a Size</h3>
             <div id="size-list" class="size-list"></div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <div id="error-popup" class="error-popup">
+    <div class="error-popup-content">
+        <p>Please select a size first!</p>
+        <button onclick="closeErrorPopup()">OK</button>
+    </div>
+</div>
+
+    <script defer src="src/js/api.js"></script>
+    <script defer src="src/js/app.js"></script>
+
 </body>
 </html>
