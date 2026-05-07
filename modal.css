@@ -1,4 +1,4 @@
-/* Modal Styles */
+/* size modal */
 .modal {
     display: none;
     position: fixed;
@@ -6,60 +6,63 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
     align-items: center;
     justify-content: center;
-    z-index: 1000;
+    z-index: 100;
 }
 
-.modal-content {
+.modal-box {
     background: white;
     padding: 30px;
-    border-radius: 12px;
-    max-width: 500px;
+    border-radius: 16px;
     width: 90%;
+    max-width: 420px;
     position: relative;
 }
 
-.close {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #888;
-}
-
-.close:hover {
-    color: #333;
-}
-
-.modal-content h3 {
+.modal-box h3 {
     margin-bottom: 20px;
     color: #333;
+    font-size: 1.1rem;
 }
 
-/* Size List */
+.modal-close {
+    position: absolute;
+    top: 12px;
+    right: 18px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #999;
+    background: none;
+    border: none;
+}
+
+.modal-close:hover {
+    color: #333;
+}
+
 .size-list {
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    margin-bottom: 20px;
 }
 
 .size-btn {
     padding: 10px 20px;
     border: 2px solid #ddd;
     background: white;
-    border-radius: 8px;
+    border-radius: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
     cursor: pointer;
-    font-weight: bold;
     transition: all 0.2s;
 }
 
 .size-btn:hover:not(:disabled) {
     border-color: #FFD700;
-    background: #FFFBF0;
+    background: #fffceb;
 }
 
 .size-btn.selected {
@@ -71,21 +74,4 @@
     opacity: 0.3;
     cursor: not-allowed;
     text-decoration: line-through;
-}
-
-/* Modal Add Button */
-.modal-add-btn {
-    width: 100%;
-    background: #FFD700;
-    border: none;
-    padding: 15px;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.3s;
-}
-
-.modal-add-btn:hover {
-    background: #FFC700;
 }

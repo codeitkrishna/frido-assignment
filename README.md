@@ -1,28 +1,20 @@
-# 🎯 Mother's Day Product Grid - Frido Assignment
+# Frido Shopify Product Grid
 
-Complete implementation of the Mother's Day landing page product grid matching the Frido design reference.
+This task displays products from the Shopify Storefront API in a responsive product grid.
 
-## ✅ Features Implemented
+## Features
 
-- ✅ **Product Grid**: 4-6 product cards in responsive grid layout
-- ✅ **Product Card Elements**:
-  - Product image with hover zoom effect
-  - Color variant indicators
-  - Product title and vendor/description
-  - Discount badge (% OFF)
-  - Original price (crossed out) and Sale price
-  - "Add to Cart" button
-- ✅ **Size Selector Modal**:
-  - Color swatches (if available)
-  - Size selection buttons
-  - Disabled state for unavailable sizes
-  - Selected state with yellow highlight
-- ✅ **Add to Cart Functionality**:
-  - Console logs price and selected size
-  - Button changes to "Added ✓" for 2 seconds
-  - Green background during success state
-  - Error message if size not selected and pressed Add to Cart
-- ✅ **Fully Responsive**: Works on mobile, tablet, and desktop
-- ✅ **Shopify Storefront API Integration**: Real data from your dev store
+- Fetches products from Shopify
+- Shows product image, title, description, discount, original price and sale price
+- Opens a size modal using product variants
+- Shows the selected size on the card
+- Works on desktop, tablet and mobile
 
-Built with ❤️ for Frido
+## Files
+
+- `index.html` - main page
+- `card.html` - single product card template
+- `script.js` - product fetch and modal logic
+- `style.css` - page and card styling
+- `modal.css` - modal styling
+- `assets/cover.jpg` - header bg image

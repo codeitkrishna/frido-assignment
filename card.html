@@ -1,22 +1,30 @@
-<!-- Product Card Component -->
-<!-- JS fetches this file, fills in the [data-field] values, then adds it to the page -->
-<div class="product-card">
+<!-- reusable card component template -->
+ 
+<div class="product-card" id="card-{{id}}">
     <div class="card-image">
-        <img data-field="image" src="" alt="">
+        <img src="{{image}}" alt="{{title}}">
     </div>
-    
+
     <div class="card-content">
-        <h3 class="product-title" data-field="title"></h3>
-        <p class="product-vendor" data-field="vendor"></p>
-        
-        <div class="price-info">
-            <span class="discount-badge" data-field="badge"></span>
-            <div class="prices">
-                <span class="original-price" data-field="original-price"></span>
-                <span class="sale-price" data-field="sale-price"></span>
-            </div>
+        <div class="product-title-wrap">
+            <h3 class="product-title">{{title}}</h3>
         </div>
-        
-        <button class="add-to-cart-btn" data-field="cart-btn">Add to Cart</button>
+        <p class="product-vendor">{{vendor}}</p>
+
+        <div class="price-row">
+            <div class="price-info">
+                <span class="discount-badge">{{discount}}% OFF</span>
+                <div class="prices">
+                    <span class="original-price">₹{{comparePrice}}</span>
+                    <span class="sale-price">₹{{salePrice}}</span>
+                </div>
+            </div>
+            <span class="size-display" id="size-{{id}}">Size: -</span>
+        </div>
+
+        <div class="card-buttons">
+            <button class="select-size-btn" onclick="openSizeModal('{{id}}')">Select Size</button>
+            <button class="add-to-cart-btn" id="cartbtn-{{id}}" onclick="addToCart('{{id}}', {{salePrice}})">Add to Cart</button>
+        </div>
     </div>
 </div>
