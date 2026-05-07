@@ -8,13 +8,15 @@ This task displays products from the Shopify Storefront API in a responsive prod
 - Shows product image, title, description, discount, original price and sale price
 - Opens a size modal using product variants
 - Shows the selected size on the card
+- Error pop up if size not selected and clicked Add to Cart
 - Works on desktop, tablet and mobile
 
 ## Files
 
 - `index.html` - main page
-- `card.html` - single product card template
-- `script.js` - product fetch and modal logic
-- `style.css` - page and card styling
-- `modal.css` - modal styling
+- `src/components/card.html` - single reusable product card template
+- `src/js/api.js` - fetch product details from Shopify StoreFront API
+- `src/js/app.js` - product display and modal logic
+- `src/css/style.css` - page and card styling
+- `src/css/modal.css` - modal styling
 - `assets/cover.jpg` - header bg image
