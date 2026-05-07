@@ -1,0 +1,176 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header h1 {
+    color: #8B5A5A;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: #666;
+}
+
+/* Products Container */
+.products-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Desktop - Grid Layout */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+/* Product Card */
+.product-card {
+    background: #FFF5F5;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Card Image */
+.card-image {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.product-card:hover .card-image img {
+    transform: scale(1.1);
+}
+
+/* Card Content */
+.card-content {
+    padding: 20px;
+}
+
+.product-title {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.product-vendor {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+/* Price Info */
+.price-info {
+    margin-bottom: 15px;
+}
+
+.discount-badge {
+    background: #fee2e2;
+    color: #ef4444;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.prices {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.original-price {
+    color: #888;
+    text-decoration: line-through;
+    font-size: 0.9rem;
+}
+
+.sale-price {
+    color: #10B981;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+/* Button */
+.add-to-cart-btn {
+    width: 100%;
+    background: #FFD700;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.add-to-cart-btn:hover {
+    background: #FFC700;
+}
+
+/* Mobile - Horizontal Scroll */
+@media (max-width: 768px) {
+    .products-grid {
+        display: flex;
+        overflow-x: auto;
+        gap: 15px;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 10px;
+    }
+    
+    .product-card {
+        min-width: 45%;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+    }
+    
+    .card-image {
+        height: 200px;
+    }
+}
+
+/* Hide scrollbar but keep functionality */
+.products-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.products-grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.products-grid::-webkit-scrollbar-thumb {
+    background: #FFD700;
+    border-radius: 10px;
+}

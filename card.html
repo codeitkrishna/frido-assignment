@@ -1,0 +1,22 @@
+<!-- Product Card Component -->
+<!-- JS fetches this file, fills in the [data-field] values, then adds it to the page -->
+<div class="product-card">
+    <div class="card-image">
+        <img data-field="image" src="" alt="">
+    </div>
+    
+    <div class="card-content">
+        <h3 class="product-title" data-field="title"></h3>
+        <p class="product-vendor" data-field="vendor"></p>
+        
+        <div class="price-info">
+            <span class="discount-badge" data-field="badge"></span>
+            <div class="prices">
+                <span class="original-price" data-field="original-price"></span>
+                <span class="sale-price" data-field="sale-price"></span>
+            </div>
+        </div>
+        
+        <button class="add-to-cart-btn" data-field="cart-btn">Add to Cart</button>
+    </div>
+</div>

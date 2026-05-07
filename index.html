@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mother's Day Collection - Frido</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>🌸 Find Her Comfort 🌸</h1>
+        <p>Gift Comfort to your Comfort this Mother's Day</p>
+    </div>
+
+    <!-- Products Section -->
+    <div class="products-container">
+        <div class="products-grid" id="products-grid">
+            <!-- Cards will be added here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Size Selection Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            
+            <h3>Select Size</h3>
+            
+            <div id="size-list" class="size-list">
+                <!-- Size buttons will be added here -->
+            </div>
+
+            <div id="error-msg">
+
+            </div>
+            
+            <button id="add-btn" class="modal-add-btn" onclick="addToCart()">
+                ADD TO CART
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
