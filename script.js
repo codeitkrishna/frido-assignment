@@ -78,7 +78,7 @@ function buildCard(product) {
     var html = cardTemplate;
     html = html.replace(/{{id}}/g, shortId);
     html = html.replace(/{{title}}/g, product.title);
-    html = html.replace(/{{vendor}}/g, product.description || product.vendor);
+    html = html.replace(/{{description}}/g, product.description);
     html = html.replace(/{{image}}/g, image);
     html = html.replace(/{{salePrice}}/g, price);
     html = html.replace(/{{comparePrice}}/g, comparePrice);
