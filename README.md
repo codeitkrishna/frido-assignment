@@ -21,11 +21,6 @@ This task displays products from the Shopify Storefront API in a responsive prod
 - `src/css/modal.css` - modal styling
 - `assets/cover.jpg` - header bg image
 
-
-## API Response Structure
- 
-![API Response Structure](assets/image.png)
- 
 ### Sample API Response
  
 Below is a sample response from the Storefront API (fetched from Postman):
