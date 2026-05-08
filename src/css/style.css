@@ -207,7 +207,7 @@ body {
 }
 
 .price-row {
-    align-items: flex-start;   /* aligns size with badge at the top */
+    align-items: flex-start;
 }
 
 @media (max-width: 768px) {

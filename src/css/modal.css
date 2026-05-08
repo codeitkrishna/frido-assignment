@@ -76,8 +76,7 @@
     text-decoration: line-through;
 }
 
-
-/* ─── Error Popup ─── */
+/* error pop-up */
 .error-popup {
     display: none;
     position: fixed;
